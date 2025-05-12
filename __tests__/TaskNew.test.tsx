@@ -1,11 +1,11 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react';
-import Home from '../app/page';
+import Page from '../app/new/page';
 import { describe, expect, it } from 'vitest';
 
 describe('Home', () => {
   it('renders headline', () => {
-    render(<Home />);
-    expect(screen.getByText(/Get started/i)).toBeInTheDocument();
+    render(<Page />);
+    expect(screen.getByText(/タスク作成ページ/i)).toBeInTheDocument();
   });
 });
