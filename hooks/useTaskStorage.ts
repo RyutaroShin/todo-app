@@ -26,5 +26,17 @@ export default function useTaskStorage(props: useTaskStorageProps) {
     setLocalState(updated);
   };
 
-  return { tasks: localState, addTask: addTask };
+  const updateTask = (updatedTask: Task) => {
+    const updated = localState.map(task =>
+      task.id === updatedTask.id ? updatedTask : task
+    );
+    localStorage.setItem(props.key, JSON.stringify(updated));
+    setLocalState(updated);
+  };
+
+  return {
+    tasks: localState,
+    addTask,
+    updateTask,
+  };
 }

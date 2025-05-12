@@ -1,5 +1,8 @@
 // components/TaskItem.tsx
+'use client';
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Task } from '../types/task';
 
 type Props = {
@@ -9,6 +12,8 @@ type Props = {
 };
 
 const TaskItem = ({ task, onToggle, onDelete }: Props) => {
+  const router = useRouter();
+
   return (
     <div className="p-4 border rounded shadow-sm bg-white flex items-start justify-between">
       <div className="flex items-start gap-2">
@@ -23,17 +28,22 @@ const TaskItem = ({ task, onToggle, onDelete }: Props) => {
           <p className="text-sm text-gray-600">{task.description || '（詳細なし）'}</p>
         </div>
       </div>
-      {onDelete && (
+      <div className="flex flex-row items-center gap-2">
+        <button
+          className="text-blue-500 text-sm hover:underline"
+          onClick={() => router.push(`/${task.id}/edit`)}
+        >
+          編集
+        </button>
         <button
           className="text-red-500 text-sm hover:underline"
-          onClick={() => onDelete(task.id)}
+          onClick={() => onDelete?.(task.id)}
         >
           削除
         </button>
-      )}
+      </div>
     </div>
   );
 };
-
 
 export default TaskItem;
