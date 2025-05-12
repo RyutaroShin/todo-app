@@ -1,26 +1,17 @@
-'use client';
-
+// components/TaskList.tsx
 import React from 'react';
-import { useEffect, useState } from 'react';
 import { Task } from '../types/task';
-import { getTasks } from '../lib/taskStorage';
 import TaskItem from './TaskItem';
 
-const TaskList = ({ refresh }: { refresh: boolean }) => {
-  const [tasks, setTasks] = useState<Task[]>([]);
-
-  useEffect(() => {
-    const loadedTasks = getTasks();
-    const sorted = [...loadedTasks].sort((a, b) => Number(a.completed) - Number(b.completed));
-    setTasks(sorted);
-  }, [refresh]); // ← ここで refresh を監視
+const TaskList = ({ tasks }: { tasks: Task[] }) => {
+  const sorted = [...tasks].sort((a, b) => Number(a.completed) - Number(b.completed));
 
   return (
     <div className="space-y-4">
-      {tasks.length === 0 ? (
+      {sorted.length === 0 ? (
         <p className="text-gray-500">タスクがありません</p>
       ) : (
-        tasks.map(task => <TaskItem key={task.id} task={task} />)
+        sorted.map(task => <TaskItem key={task.id} task={task} />)
       )}
     </div>
   );
