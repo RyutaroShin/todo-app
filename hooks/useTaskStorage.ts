@@ -34,9 +34,25 @@ export default function useTaskStorage(props: useTaskStorageProps) {
     setLocalState(updated);
   };
 
+  const toggleTask = (id: string) => {
+    const updated = localState.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    );
+    setLocalState(updated);
+    localStorage.setItem(props.key, JSON.stringify(updated));
+  };
+
+  const deleteTask = (id: string) => {
+    const updated = localState.filter((task) => task.id !== id);
+    setLocalState(updated);
+    localStorage.setItem(props.key, JSON.stringify(updated));
+  };
+
   return {
     tasks: localState,
     addTask,
     updateTask,
+    toggleTask,
+    deleteTask,
   };
 }

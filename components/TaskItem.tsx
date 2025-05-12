@@ -37,7 +37,11 @@ const TaskItem = ({ task, onToggle, onDelete }: Props) => {
         </button>
         <button
           className="text-red-500 text-sm hover:underline"
-          onClick={() => onDelete?.(task.id)}
+          onClick={() => {
+            if (window.confirm('このタスクを削除してもよろしいですか？')) {
+              onDelete?.(task.id);
+            }
+          }}
         >
           削除
         </button>

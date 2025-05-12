@@ -4,12 +4,8 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import TaskList from '../../components/TaskList';
-import useTaskStorage from '../../hooks/useTaskStorage';
 
 export default function Page() {
-  const { tasks } = useTaskStorage({
-    key: 'task-list',
-  });
   const router = useRouter();
 
   return (
@@ -21,7 +17,7 @@ export default function Page() {
       >
         作成
       </button>
-      <TaskList tasks={tasks} />
+      <TaskList />
     </main>
   );
 }

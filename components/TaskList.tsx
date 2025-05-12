@@ -1,9 +1,13 @@
 // components/TaskList.tsx
-import React from 'react';
-import { Task } from '../types/task';
-import TaskItem from './TaskItem';
+'use client';
 
-const TaskList = ({ tasks }: { tasks: Task[] }) => {
+import React from 'react';
+import TaskItem from './TaskItem';
+import useTaskStorage from '../hooks/useTaskStorage';
+
+const TaskList = () => {
+  const { tasks, toggleTask, deleteTask } = useTaskStorage({ key: 'task-list' });
+
   const sorted = [...tasks].sort((a, b) => Number(a.completed) - Number(b.completed));
 
   return (
@@ -11,7 +15,14 @@ const TaskList = ({ tasks }: { tasks: Task[] }) => {
       {sorted.length === 0 ? (
         <p className="text-gray-500">タスクがありません</p>
       ) : (
-        sorted.map(task => <TaskItem key={task.id} task={task} />)
+        sorted.map(task => (
+          <TaskItem
+            key={task.id}
+            task={task}
+            onToggle={toggleTask}
+            onDelete={deleteTask}
+          />
+        ))
       )}
     </div>
   );
