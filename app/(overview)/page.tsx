@@ -5,7 +5,7 @@ import React from 'react';
 import TaskList from '../../components/TaskList';
 import useTaskStorage from '../../hooks/useTaskStorage';
 
-const Page = () => {
+export default function Page() {
   const { tasks, addDummyTask } = useTaskStorage({
     key: 'task-list',
   });
@@ -23,5 +23,3 @@ const Page = () => {
     </main>
   );
 };
-
-export default Page;
