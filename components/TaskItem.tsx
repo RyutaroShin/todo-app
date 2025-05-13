@@ -4,6 +4,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Task } from '../types/task';
+import Link from 'next/link';
 
 type Props = {
   task: Task;
@@ -29,14 +30,14 @@ const TaskItem = ({ task, onToggle, onDelete }: Props) => {
         </div>
       </div>
       <div className="flex flex-row items-center gap-2">
-        <button
-          className="text-blue-500 text-sm hover:underline"
-          onClick={() => router.push(`/${task.id}/edit`)}
+        <Link
+          href={`/${task.id}/edit`}
+          className="text-blue-500 text-sm hover:underline cursor-pointer"
         >
           編集
-        </button>
+        </Link>
         <button
-          className="text-red-500 text-sm hover:underline"
+          className="text-red-500 text-sm hover:underline cursor-pointer"
           onClick={() => {
             if (window.confirm('このタスクを削除してもよろしいですか？')) {
               onDelete?.(task.id);
