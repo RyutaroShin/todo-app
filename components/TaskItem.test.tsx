@@ -28,8 +28,8 @@ describe('TaskItemのテスト', () => {
   }
 
   beforeEach(() => {
-    mockToggle = vi.fn()
-    mockDelete = vi.fn()
+    mockToggle.mockReset()
+    mockDelete.mockReset()
   })
 
   it('タイトルが正しく表示されること', () => {
