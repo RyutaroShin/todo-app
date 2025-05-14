@@ -8,9 +8,6 @@ import useTaskStorage from '../../hooks/useTaskStorage';
 import Link from 'next/link';
 
 export default function Page() {
-  const { tasks } = useTaskStorage({
-    key: 'task-list',
-  });
   const router = useRouter();
 
   return (
@@ -22,7 +19,7 @@ export default function Page() {
       >
         作成
       </Link>
-      <TaskList tasks={tasks} />
+      <TaskList />
     </main>
   );
 }
