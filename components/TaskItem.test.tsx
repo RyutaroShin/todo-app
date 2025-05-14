@@ -18,8 +18,8 @@ vi.mock('next/navigation', () => ({
 }))
 
 describe('TaskItemのテスト', () => {
-  let mockToggle: (id: string) => void
-  let mockDelete: (id: string) => void
+  const mockToggle = vi.fn()
+  const mockDelete = vi.fn()
   const task: Task = {
     id: '1',
     title: 'テストタイトル',
