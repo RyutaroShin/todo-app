@@ -20,18 +20,11 @@ export default function useTaskStorage(props: useTaskStorageProps) {
     }
   }, [props.key]);
 
-  const addDummyTask = () => {
-    const newTask: Task = {
-      id: generateId(),
-      title: 'ダミータスク ' + (localState.length + 1),
-      description: 'これはテスト用のダミータスクです。',
-      completed: false,
-    };
-
-    const updated = [...localState, newTask];
+  const addTask = (task: Task) => {
+    const updated = [...localState, task];
     localStorage.setItem(props.key, JSON.stringify(updated));
     setLocalState(updated);
   };
 
-  return { tasks: localState, addDummyTask: addDummyTask };
+  return { tasks: localState, addTask: addTask };
 }
